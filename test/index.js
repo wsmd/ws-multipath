@@ -6,7 +6,7 @@ const wss = new MultipathServer({
 });
 
 wss.on('unhandled', socket => {
-  socket.send('nope!');
+  console.log('Unhandled socket!');
   socket.destroy();
 });
 
