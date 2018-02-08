@@ -13,11 +13,11 @@ const { Server } = require('ws');
 
 const PORT = 1234;
 
-const server1 = new Server({ port: PORT, path:'/notifications' });
-const server2 = new Server({ port: PORT, path:'/messages' });
+const server1 = new Server({ port: PORT, pathname:'/notifications' });
+const server2 = new Server({ port: PORT, pathname:'/messages' });
 ```
 
-Soon after you realize that it's not possible. Not easily, at least!
+Soon after, you realize that it's not possible. Not easily, at least.
 
 Having multiple WebSocket servers on the same port can be a messy process. So I decided to write `ws-multipath` in hopes of simplifying this task.
 
@@ -60,7 +60,7 @@ TODO: document API
 
 ## Installation
 
-To install `TypingMonitor` as a CommonJS module via a package manager:
+To install `ws-multipath`, you must have `ws` installed as well.
 
 ```bash
 # ws is a peer-dependency of ws-multipath
