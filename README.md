@@ -13,8 +13,8 @@ const { Server } = require('ws');
 
 const PORT = 1234;
 
-const server1 = new Server({ port: PORT, pathname:'/notifications' });
-const server2 = new Server({ port: PORT, pathname:'/messages' });
+const server1 = new Server({ port: PORT, path:'/notifications' });
+const server2 = new Server({ port: PORT, path:'/messages' });
 ```
 
 Soon after, you realize that it's not possible. Not easily, at least.
@@ -40,8 +40,8 @@ const wss = new MultipathServer({ port: 1234 });
  *   → ws://localhost:1234/messages
  *   → ws://localhost:1234/notifications
  */
-const messages      = wss.createHandler({ pathname: '/messages' });
-const notifications = wss.createHandler({ pathname: '/notifications' });
+const messages      = wss.createHandler({ path: '/messages' });
+const notifications = wss.createHandler({ path: '/notifications' });
 
 messages.on('connection', (ws) => {
   ws.send('hello from /messages!');

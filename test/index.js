@@ -5,29 +5,24 @@ const wss = new MultipathServer({
   port: 5000,
 });
 
+wss.on('connection', (ws, pathname) => {
+  console.log(`Received a ${ws.constructor.name} on`, pathname);
+});
+
 wss.on('unhandled', socket => {
   console.log('Unhandled socket!');
   socket.destroy();
 });
 
-wss.on('connection', (ws, pathname) => {
-  console.log(`Received a ${ws.constructor.name} on`, pathname);
-});
+const messages = wss.createHandler({ path: '/messages' });
+const notifications = wss.createHandler({ path: '/notifications' });
 
-const messagesServer = wss.createHandler({
-  pathname: '/messages',
-});
-
-const notificationsServer = wss.createHandler({
-  pathname: '/notifications',
-});
-
-messagesServer.on('connection', socket => {
+messages.on('connection', socket => {
   socket.send('hello from messages!');
   socket.on('error', () => {});
 });
 
-notificationsServer.on('connection', socket => {
+notifications.on('connection', socket => {
   socket.send('hello from notifications!');
   socket.on('error', () => {});
 });
