@@ -10,6 +10,10 @@ wss.on('unhandled', socket => {
   socket.destroy();
 });
 
+wss.on('connection', (ws, pathname) => {
+  console.log(`Received a ${ws.constructor.name} on`, pathname);
+});
+
 const messagesServer = wss.createHandler({
   pathname: '/messages',
 });
