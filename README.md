@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/2100222/35955875-2cbc24e2-0c60-11e8-8639-845220373e3f.png" width="88" />
+<img src="https://user-images.githubusercontent.com/2100222/36067365-6f2f344c-0e89-11e8-87fa-94513973b6d3.png" width="88" alt="logo" />
 
 # ws-multipath
 
