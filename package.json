@@ -3,6 +3,9 @@
   "version": "0.1.0-beta.0",
   "description": "Serve multiple WebSocket endpoints using one shared server",
   "main": "index.js",
+  "engines": {
+    "node": ">=6.2.2"
+  },
   "repository": "wsmd/ws-multipath",
   "author": "Waseem Dahman <dwaseem@icloud.com> (https://github.com/wsmd)",
   "license": "MIT",
@@ -27,7 +30,7 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "peerDependencies": {
-    "ws": "4.0.0"
+    "ws": ">=0.5.0"
   },
   "devDependencies": {
     "coveralls": "3.0.0",
