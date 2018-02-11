@@ -28,6 +28,7 @@ Emitted each time a socket is connected but is not handled by any handlers. By d
 ### Event: 'connection'
 
 - `socket` `<ws.Socket>` WebSocket that is handled by a handler
+- `request` `<http.incomingMessage>` The HTTP request object
 - `pathname` `<string>` The pathname name to which the socket was connected
 
 Emitted each time a socket is connected and handled by a handler.
