@@ -6,7 +6,7 @@ const PORT = 5000;
 
 let server;
 function createMultipathServer(options = {}) {
-  server = new MultipathServer({ port: PORT, ...options });
+  server = new MultipathServer(Object.assign({ port: PORT }, options));
 }
 
 function connectToHandler(handler) {
