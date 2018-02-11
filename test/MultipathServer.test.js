@@ -1,4 +1,6 @@
 const MultipathServer = require('../lib/MultipathServer');
+const http = require('http');
+const WebSocket = require('ws');
 
 const PORT = 5000;
 
@@ -30,16 +32,20 @@ describe('MultipathServer', () => {
   });
 
   it('creates handlers, establishes connections, and emits events', (done) => {
-    const unhandledSocketSpy = jest.fn();
-    const handledSocketSpy = jest.fn();
+    const serverConnectionListener = jest.fn();
+    const serverUnhandledListener = jest.fn();
 
     createMultipathServer();
-    server.on('unhandled', unhandledSocketSpy);
-    server.on('connection', handledSocketSpy);
+    server.on('connection', serverConnectionListener);
+    server.on('unhandled', serverUnhandledListener);
 
-    const createAndTestHandler = (options) => new Promise((resolve, reject) => {
+    const createAndTestHandler = (options) => new Promise((resolve) => {
       const handler = server.createHandler(options);
-      handler.on('connection', resolve);
+      handler.on('connection', (socket, request) => {
+        expect(socket).toBeInstanceOf(WebSocket);
+        expect(request).toBeInstanceOf(http.IncomingMessage);
+        resolve();
+      });
       connectToHandler(handler);
     });
 
@@ -47,9 +53,12 @@ describe('MultipathServer', () => {
       createAndTestHandler({ path: '/foo' }),
       createAndTestHandler({ path: '/bar' }),
     ]).then(() => {
-      expect(handledSocketSpy.mock.calls[0][1]).toEqual('/foo');
-      expect(handledSocketSpy.mock.calls[1][1]).toEqual('/bar');
-      expect(unhandledSocketSpy).not.toHaveBeenCalled();
+      const connectionCalls = serverConnectionListener.mock.calls;
+      expect(connectionCalls[0][1]).toBeInstanceOf(http.IncomingMessage);
+      expect(connectionCalls[0][2]).toEqual('/foo');
+      expect(connectionCalls[1][1]).toBeInstanceOf(http.IncomingMessage);
+      expect(connectionCalls[1][2]).toEqual('/bar');
+      expect(serverUnhandledListener).not.toHaveBeenCalled();
       done();
     });
   });
@@ -77,6 +86,16 @@ describe('MultipathServer', () => {
     server.on('unhandled', (socket) => {
       expect(clientErrorSpy).not.toHaveBeenCalled();
       socket.destroy();
+      done();
+    });
+  });
+
+  it('closes a server and emits a close event', (done) => {
+    createMultipathServer();
+    const closeCallback = jest.fn();
+    server.on('close', closeCallback);
+    server.close(() => {
+      expect(closeCallback).toHaveBeenCalled();
       done();
     });
   });

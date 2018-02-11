@@ -28,9 +28,14 @@ Emitted each time a socket is connected but is not handled by any handlers. By d
 ### Event: 'connection'
 
 - `socket` `<ws.Socket>` WebSocket that is handled by a handler
+- `request` `<http.incomingMessage>` The HTTP request object
 - `pathname` `<string>` The pathname name to which the socket was connected
 
 Emitted each time a socket is connected and handled by a handler.
+
+### Event: 'close'
+
+Emitted when the server closes.
 
 ### server.createHandler(options)
 
@@ -43,9 +48,11 @@ If any of these three attributes is passed to `options` an error will be thrown.
 
 Returns a new [`WebSocket.Server`](https://github.com/websockets/ws/blob/master/doc/ws.md#class-websocketserver) instance of `ws`. Please refer the the `ws` documentation for more information on this.
 
-### server.close()
+### server.close([callback])
 
-Stops the server from accepting new connections.
+- `callback` `<function>`
+
+Stops the server from accepting new connections. The optional `callback` will be called once the `'close'` event occurs.
 
 ### server.listening
 
