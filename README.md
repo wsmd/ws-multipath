@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/wsmd/ws-multipath.svg?branch=master)](https://travis-ci.org/wsmd/ws-multipath)
+[![Coverage Status](https://coveralls.io/repos/github/wsmd/ws-multipath/badge.svg?branch=master)](https://coveralls.io/github/wsmd/ws-multipath?branch=master)
+[![License](https://img.shields.io/github/license/wsmd/ws-multipath.svg)](https://github.com/wsmd/ws-multipath/blob/master/LICENSE)
+
 <img src="https://user-images.githubusercontent.com/2100222/36067365-6f2f344c-0e89-11e8-87fa-94513973b6d3.png" width="88" alt="logo" />
 
 # ws-multipath
