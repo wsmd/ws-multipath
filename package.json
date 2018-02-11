@@ -4,7 +4,7 @@
   "description": "Serve multiple WebSocket endpoints using one shared server",
   "main": "index.js",
   "engines": {
-    "node": ">=6.2.2"
+    "node": ">=6.0.0"
   },
   "repository": "wsmd/ws-multipath",
   "author": "Waseem Dahman <dwaseem@icloud.com> (https://github.com/wsmd)",
