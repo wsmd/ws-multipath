@@ -1,6 +1,6 @@
 {
   "name": "ws-multipath",
-  "version": "0.1.0-beta.0",
+  "version": "0.1.0",
   "description": "Serve multiple WebSocket endpoints using one shared server",
   "main": "index.js",
   "engines": {
