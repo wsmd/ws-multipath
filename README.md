@@ -36,31 +36,27 @@ Sounds complicated, right? That's all what `ws-multipath` does!
 ```js
 const MultipathServer = require('ws-multipath');
 
-const wss = new MultipathServer({ port: 1234 });
+const server = new MultipathServer({ port: 1234 });
 
-/**
- * This will create two WebSocket endpoints that are handled independently
- * and running on the same port/server:
- *   → ws://localhost:1234/messages
- *   → ws://localhost:1234/notifications
- */
-const messages      = wss.createHandler({ path: '/messages' });
-const notifications = wss.createHandler({ path: '/notifications' });
+const foo = server.createHandler({ path: '/foo' });
+const bar = server.createHandler({ path: '/bar' });
 
-messages.on('connection', (ws) => {
-  ws.send('hello from /messages!');
+// handle sockets connecting to ws://localhost:1234/foo
+foo.on('connection', (ws) => {
+  ws.send('hello from /foo!');
 });
 
-notifications.on('connection', (ws) => {
-  ws.send('hello from /notifications!');
+// handle sockets connecting to ws://localhost:1234/bar
+bar.on('connection', (ws) => {
+  ws.send('hello from /bar!');
 });
 ```
 
-## Usage
+## Documentation
 
 > _Please note that this is experimental and under active development. Therefore, it may have numerous bugs, and the API is subject to change._
 
-TODO: document API
+See [`/docs/api.md`](./docs/api.md) for full API documentation.
 
 ## Installation
 
