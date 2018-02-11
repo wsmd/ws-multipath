@@ -90,6 +90,12 @@ describe('MultipathServer', () => {
     });
   });
 
+  it('emits close event', (done) => {
+    createMultipathServer();
+    server.on('close', done);
+    server.close();
+  });
+
   it('throws when creating duplicate handlers', () => {
     createMultipathServer();
     server.createHandler({ path: '/foo' });
