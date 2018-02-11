@@ -52,7 +52,7 @@ Returns a new [`WebSocket.Server`](https://github.com/websockets/ws/blob/master/
 
 - `callback` `<function>`
 
-Stops the server from accepting new connections.
+Stops the server from accepting new connections. The optional `callback` will be called once the `'close'` event occurs.
 
 ### server.listening
 

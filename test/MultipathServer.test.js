@@ -90,10 +90,14 @@ describe('MultipathServer', () => {
     });
   });
 
-  it('emits close event', (done) => {
+  it('closes a server and emits a close event', (done) => {
     createMultipathServer();
-    server.on('close', done);
-    server.close();
+    const closeCallback = jest.fn();
+    server.on('close', closeCallback);
+    server.close(() => {
+      expect(closeCallback).toHaveBeenCalled();
+      done();
+    });
   });
 
   it('throws when creating duplicate handlers', () => {
